@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>When and Where!! That's the question...</title>
+
+		<link rel="stylesheet" media='only screen and (min-width: 481px)' type="text/css" href="normal.css"/>
+		<link rel="stylesheet" media='only screen and (max-width: 480px)' type="text/css" href="movil.css"/>
+		<link rel="stylesheet" type="text/css" href="impresora.css" media="print" />
+
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="gmaps.js"></script>
+		<script type="text/javascript">
+			// Determine support for Geolocation
+			if (navigator.geolocation) {
+    			// Locate position
+    			navigator.geolocation.getCurrentPosition(displayPosition, errorFunction);
+			} else {
+    			alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+			}
+
+			// Success callback function
+			function displayPosition(pos) {
+    			var mylat = pos.coords.latitude;
+    			var mylong = pos.coords.longitude;
+    			var thediv = document.getElementById('locationinfo');
+    			thediv.innerHTML = '<p>Your longitude is :' + mylong + ' and your latitide is ' + mylat + '</p>';
+
+			//Load Google Map
+				var latlng = new google.maps.LatLng(mylat, mylong);
+    			var myOptions = {
+    				zoom: 15,
+    				center: latlng,
+    				mapTypeId: google.maps.MapTypeId.ROADMAP
+    			};
+   
+			var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+			//Add marker
+			var marker = new google.maps.Marker({
+	    			position: latlng, 
+	    			map: map, 
+	    			title:"You are here"
+	 			});
+			}
+
+			// Error callback function
+			function errorFunction(pos) {
+    			alert('Error!');
+			}
+		</script>
+
+		<script type="text/javascript" src="zepto.js"></script>
+		<SCRIPT TYPE="text/javascript">
+
+			function x2(n, i, x1, r) {return x1 + r*Math.sin(2*Math.PI*n/i);};
+			function y2(n, i, y1, r) {return y1 - r*Math.cos(2*Math.PI*n/i);};
+
+			$(function(){
+				function mostrar_hora() {
+					var d = new Date();
+					var h = d.getHours();
+					var m = d.getMinutes();
+					var s = d.getSeconds();
+					if (h<10) { //dos cifras para la hora
+        				h="0"+h;
+            		}
+        			if (m<10) { //dos cifras para el minuto
+            			m="0"+m;
+            		}
+        			if (s<10) { //dos cifras para el segundo
+            			s="0"+s;
+            		}
+					$('#tex').html(h + ":" + m + ":" + s);
+					$('#seg').attr('x2', x2(s,60,80,50)).attr('y2', y2(s,60,80,50));
+					$('#min').attr('x2', x2(m,60,80,40)).attr('y2', y2(m,60,80,40));
+					$('#hor').attr('x2', x2(h,12,80,30)).attr('y2', y2(h,12,80,30));
+				}
+				setInterval(function(){mostrar_hora();}, 1000);
+				mostrar_hora();
+			})
+		</SCRIPT>
+	</head>
+
+	<body>
+		<header>DÓNDE Y CUÁNDO!!</header>
+
+		<div class="digital">
+			<div id="tex">HORA</div>
+		</div>
+		<div class="analogico">
+			<svg id="reloj" viewBox="0 0 200 200">
+			<circle id="myCircle"
+				cx="80" cy="80" r="50"
+				fill="white" stroke="black" stroke-width="3"/>
+			<line id="hor"
+				x1="80" y1="80" x2="110" y2="80"
+				style="stroke:grey;stroke-width:5"/>
+			<line id="min"
+				x1="80" y1="80" x2="80" y2="40"
+				style="stroke:grey;stroke-width:3"/>
+			<line id="seg"
+				x1="80" y1="80" x2="115" y2="45"
+				style="stroke:red;stroke-width:1"/>
+		</svg>
+		</div>
+			
+		
+		
+		<div id="map_canvas"></div>
+    	<div id="locationinfo">LOCALIZACIÓN</div>
+
+		<footer>Autor: <span>Manuel Ramos Calderón</span></footer>
+
+	</body>
+
+</html>

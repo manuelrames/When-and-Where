@@ -1,0 +1,57 @@
+body, html {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+	background-color: #eee;
+}
+header {
+	padding-top: 1%;
+	margin: 1%;
+	width: 99%;
+	height: 60px;
+	font-family: "Papyrus";
+	font-weight: bold;
+	font-size: 25pt;
+	float: center;
+	background-color: green;
+	text-align: center;
+	text-decoration: underline;
+}
+.digital {
+	width: 40%;
+	background-color: #db4e36;
+	color: #db4e36;
+	font-family:sans-serif;
+	font-size: 3em;
+	font-weight: bold;
+	text-align: center;
+	padding: 0.5em;
+	margin: 1%;
+}
+#tex {
+	padding-top: 0.2em;
+	background-color: #FFF;
+}
+.analogico{
+	width: 50%;
+	height: 50%;
+	float: left;
+}
+#reloj {
+	text-align: left;
+	width: 50%;
+	height: 100%;
+	width: 100%; 
+}
+#map_canvas {
+	float:left;
+    height: 42.5%;
+    width: 50%;
+}
+footer{
+	clear: both;
+	text-align: center;
+	font-weight: bolder;
+	float: center;
+}
